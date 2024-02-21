@@ -12,25 +12,25 @@ class Server {
   }
   private setRoute() {
     // router
-    app.use(catRouter);
+    this.app.use(catRouter);
   }
   private setMiddleware() {
     // ---- middleware ----
     // logging middleware
-    app.use((req, res, next) => {
+    this.app.use((req, res, next) => {
       console.log(req.rawHeaders[1]);
       console.log("this is middleware");
       next(); // 다음 라우터 실행
     });
 
     // json middleware
-    app.use(express.json());
+    this.app.use(express.json());
 
     // route middleware
     this.setRoute();
 
     // middleware for 404 error
-    app.use((req, res, next) => {
+    this.app.use((req, res, next) => {
       console.log("this is middleware");
       res.send({ error: "404 not found Error!" });
     });
